@@ -6,24 +6,20 @@ describe("project api endpoint tests", () => {
     server.close();
   });
 
-  const expectedProjectSchema = {
-    id: expect.any(String),
-    name: expect.any(String),
-    country: expect.any(String),
-    image: expect.any(String),
-    pricePerTon: expect.any(Number),
-    volumeInTon: expect.any(Number),
-    distributionWeight: expect.any(Number),
-    supplierName: expect.any(String),
-    earliestDelivery: expect.any(Date),
-    description: expect.any(String),
-  }
-
   it("200: Should return a projects array", async () => {
     const response = await request(server).get("/api/project");
     expect(response.statusCode).toEqual(200);
     response.body.forEach((project: any) => {
-        expect.objectContaining(expectedProjectSchema);
+      expect(project).toHaveProperty("id");
+      expect(project).toHaveProperty("name");
+      expect(project).toHaveProperty("country");
+      expect(project).toHaveProperty("image");
+      expect(project).toHaveProperty("pricePerTon");
+      expect(project).toHaveProperty("volumeInTon");
+      expect(project).toHaveProperty("distributionWeight");
+      expect(project).toHaveProperty("supplierName");
+      expect(project).toHaveProperty("earliestDelivery");
+      expect(project).toHaveProperty("description");
     });
   });
 });
