@@ -1,0 +1,14 @@
+version: "3.7"
+
+services:
+  db:
+    container_name: portfolio_app_database
+    command: postgres -c wal_level=logical
+    build: ./database
+    restart: always
+    environment:
+      POSTGRES_DB: portfolio_app
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: pass
+    ports:
+      - 127.0.0.1:5432:5432
