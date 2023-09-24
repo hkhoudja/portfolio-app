@@ -6,7 +6,9 @@
     "dev": "concurrently 'docker-compose -f docker-compose.local.yml up' 'next dev'",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prisma-migrate": "npx prisma migrate dev",
+    "prisma-seed": "npx ts-node prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.3.1",
