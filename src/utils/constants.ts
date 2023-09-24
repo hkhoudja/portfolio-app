@@ -31,6 +31,34 @@ export const PROJECT_COLUMNS = [
   },
 ];
 
+export const PORTFOLIO_COLUMNS = [
+    {
+        title: "Name",
+        dataIndex: "name",
+        key: "name",
+      },
+      {
+        title: "Supplier name",
+        dataIndex: "supplierName",
+        key: "supplierName",
+      },
+      {
+        title: "Country",
+        dataIndex: "country",
+        key: "country",
+      },
+      {
+        title: "Price",
+        dataIndex: "price",
+        key: "price",
+      },
+      {
+        title: "Order volume",
+        dataIndex: "weight",
+        key: "weight",
+      },
+]
+
 export const PROJECTS_DATA = [
   {
     id: "1",

@@ -29,7 +29,6 @@ export function SideMenu() {
     return `menu-${pathname}`;
   };
 
-  console.log({ router });
   return (
     <Sider style={{ background: "#fff", minHeight: "calc(100vh - 65px)" }}>
       <Menu

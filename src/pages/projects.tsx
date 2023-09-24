@@ -1,4 +1,4 @@
-import { useGetProjects } from "@/hooks/useGetProjects";
+import { useGetProjects } from "@/hooks";
 import { PROJECT_COLUMNS } from "@/utils";
 import { Alert, Button, Card, Table } from "antd";
 import Head from "next/head";
