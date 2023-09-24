@@ -105,3 +105,9 @@ a {
     color-scheme: dark;
   }
 }
+
+.content-layout {
+  width: 100%;
+  margin: 0 auto;
+  height: 100%;
+}

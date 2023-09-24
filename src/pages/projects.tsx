@@ -1,17 +1,17 @@
-import Head from 'next/head'
+import Head from "next/head";
 
-export default function Home() {
+export default function Projects() {
   return (
     <>
       <Head>
-        <title>Homepage</title>
-        <meta name="description" content="Portfolio app homepage" />
+        <title>Projects</title>
+        <meta name="description" content="Portfolio app projects page" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className='content-layout'>
-        <h1>Home page</h1>
+        <h1>Projects page</h1>
       </main>
     </>
-  )
+  );
 }
