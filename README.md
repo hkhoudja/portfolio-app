@@ -59,4 +59,5 @@ The algorithm (contained in @/utils/calculatePortfolio.ts) is a recursive algori
 - Handle application responsiveness and improve UI/UX
 - Handle pagination and/or lazy loading for projects, as the data gets bigger
 - Display more relevant information about portfolio generation, e.g. initial distribution vs actual distribution
+- Handle rounding up or down distributed credits while respecting the total weight/credits
 - Define models and typings for API endpoints (or use tRPC if monorepo)
