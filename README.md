@@ -1,40 +1,62 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 ## Getting Started
 
-First, run the development server:
+### Prerequisits
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Node.js is installed
+- Docker is installed
+- postgres is installed
+- docker compose is installed
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+To get started, please make sure that docker is running and then run the following commands in order in the root directory of the project:
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+1. `npm install`
+2. `npm run dev`
+3. `npm run prisma-migrate`
+4. `npm run prisma-seed`
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Running tests
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+In order to run the test please run the following command:
+`npm run test`
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Approach
 
-## Learn More
+### General
 
-To learn more about Next.js, take a look at the following resources:
+- For the basic browsing and discovery features, I created 3 pages and a side menu for navigation
+- Projects page is a discovery page for users to browse the available projects
+- Portfolio page is for users to generate a portfolio given a number of credits
+- Home page would have contained some information and links to other pages
+- One API endpoint /api/project to return the list of projects
+- Generate/calculate portfolio on the frontend
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Why did I choose to run the portfolio logic in the frontend?
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+There is an argument to be made for both choices which would have depended on what we are trying to optimise/prioritise:
 
-## Deploy on Vercel
+- Frontend: less load on the server
+- Backend: webservers are faster especially for bigger data size
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Calculate portfolio algorithm
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The algorithm (contained in @/utils/calculatePortfolio.ts) is a recursive algorithm that does the following:
+
+- it starts by checking the active projects weight distribution and normalizes them to 100%
+- calculates the credits distribution proportionally to the distribution weight disregarding the projects credits
+- if no project credits is falling short of the calculated distribution it returns distribution
+- else it calculates the remaining credits left to distribute and deactivates the projects where all credits have been used and keeps track of the weight used from each project and adds the used weight/credits
+- it recusively calls itself this time with the remaining credits and the updated list of active projects
+- stop condition: all input credits are consumed
+- stop condition: when all projects run out of credits to distribute
+
+## Improvements
+
+- Refactoring the calculate portfolio logic, i.e. better attributes/variables namings, passing only necessary data from projects
+- Refactoring components for better code readability and resusability
+- Refetch data before recalculating portfolio, so the user does not use stale data
+- Handle loading and errors on the portfolio components
+- Move calculate portfolio logic to the backend, as it scales better for bigger data size. Also it is generally accepted that business logic should live in the backend
+- Handle application responsiveness and improve UI/UX
+- Handle pagination and/or lazy loading for projects, as the data gets bigger
+- Display more relevant information about portfolio generation, e.g. initial distribution vs actual distribution
+- Define models and typings for API endpoints (or use tRPC if monorepo)
